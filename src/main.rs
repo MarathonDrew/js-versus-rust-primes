@@ -1,24 +1,25 @@
 use std::time::Instant;
 
-const LIMIT: i64 = 1000000;
+const LIMIT: i32 = 1000000;
+const PRIMES_SIZE: usize = 200000;
 
 fn main() {
-    let now = Instant::now();
-    let mut primes = vec![1, 2];
     println!("generating primes through {}", LIMIT);
+    let now = Instant::now();
+    let mut primes = vec![0, 1];
+    primes.resize(PRIMES_SIZE, -1);
     for i in 3..=LIMIT {
-        let mut prime = true;
-        for j in 1..primes.len() {
+        let total_primes = primes.len();
+        for j in 1..total_primes {
             if i % primes[j] == 0 {
-                prime = false;
                 break;
             }
-        }
-        if prime {
-            primes.push(i);
+            if j + 1 == total_primes {
+                primes.push(i);
+            }
         }
     }
     let elapsed = now.elapsed();
-    println!("generated primes in {:.2?}", elapsed);
+    println!("generated primes in {:.3?}", elapsed);
     println!("generated {} primes", primes.len());
 }
