@@ -1,4 +1,4 @@
-function generatePrimes(limit = 1000) {
+function generatePrimes(limit = 1000000) {
     console.log(`generating primes through ${limit}`);
     console.time("generating primes");
     const primes = [1, 2];
